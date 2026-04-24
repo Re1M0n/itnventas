@@ -1,0 +1,32 @@
+version: '3.9'
+services:
+  api:
+    image: itnventas/api:latest
+    container_name: ventas-api
+    ports:
+      - "4000:4000"
+    environment:
+      - API_PORT=4000
+    depends_on:
+      - db
+  ui:
+    image: itnventas/ui:latest
+    container_name: ventas-ui
+    ports:
+      - "8008:8008"
+    depends_on:
+      - api
+  db:
+    image: mariadb:10.11
+    container_name: ventas-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=ventas
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+volumes:
+  db_data:
+    driver: local
