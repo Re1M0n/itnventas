@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  api:
+    build: .
+    container_name: ventas-api
+    ports:
+      - "4000:4000"
+    environment:
+      - API_PORT=4000
+    depends_on:
+      - db
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    container_name: ventas-ui
+    ports:
+      - "8008:8008"
+    depends_on:
+      - api
+  db:
+    image: mariadb:10.11
+    container_name: ventas-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=ventas
+    ports:
+      - "3306:3306"
+  migrate:
+    build: ./installer
+    container_name: ventas-installer
+    depends_on:
+      - db
+    environment:
+      - MARIA_DATABASE=ventas
+    entrypoint: ["node","installer/index.js","init"]
