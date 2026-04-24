@@ -1,0 +1,5 @@
+FROM node:18-alpine
+WORKDIR /ui
+COPY frontend ./frontend
+CMD ["node","frontend/server.js"]
+EXPOSE 8008

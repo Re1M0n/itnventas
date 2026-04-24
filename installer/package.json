@@ -1,0 +1,14 @@
+{
+  "name": "installer-mariadb",
+  "version": "0.1.0",
+  "description": "Installer and migrations for MariaDB for Ventas app",
+  "private": true,
+  "scripts": {
+    "init": "node index.js init",
+    "migrate": "node index.js migrate"
+  },
+  "dependencies": {
+    "knex": "^1.0.0",
+    "mariadb": "^3.1.0"
+  }
+}
