@@ -1,0 +1,6 @@
+{
+  "Name": "itnventas",
+  "Type": 1,
+  "EndpointID": 1,
+  "StackFileContent": "version: '3.9'\\nservices:\\n  api:\\n    image: itnventas/api:latest\\n    ports: \\\"4000:4000\\"\\n    environment: \\\"API_PORT=4000\\"\\n    depends_on: \\\"db\\"\\n  ui:\\n    image: itnventas/ui:latest\\n    ports: \\\"8008:8008\\"\\n    depends_on: \\\"api\\"\\n  db:\\n    image: mariadb:10.11\\n    environment:\\n      - MYSQL_ROOT_PASSWORD=root\\n      - MYSQL_DATABASE=ventas\\n    ports:\\n      - \\\"3306:3306\\"\\n  volumes:\\n    db_data: { driver: local }\n"
+}
